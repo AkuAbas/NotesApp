@@ -44,7 +44,6 @@ class HomeViewModel @Inject constructor(
 
     private fun handleSharedPref() {
         val login = sharedPreferences.getBoolean("isLoged", false)
-        Log.e("login", login.toString())
         if (login) {
             val editor = sharedPreferences.edit()
             editor.putBoolean("isLoged", false)
