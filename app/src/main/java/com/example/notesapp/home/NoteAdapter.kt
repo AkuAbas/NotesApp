@@ -8,7 +8,7 @@ import com.example.notesapp.local.Note
 
 class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
-    val noteList = arrayListOf<Note>()
+    private val noteList = arrayListOf<Note>()
     lateinit var onClick: (Note) -> Unit
     lateinit var onDelete: (Note)-> Unit
 

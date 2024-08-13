@@ -15,5 +15,7 @@ data class Note(
     @ColumnInfo("note_title")
     val title: String,
     @ColumnInfo("note_body")
-    val body: String
-): Parcelable
+    val body: String,
+    @ColumnInfo("note_date")
+    val date: String
+) : Parcelable

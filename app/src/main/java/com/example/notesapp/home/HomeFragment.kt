@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.notesapp.databinding.CustomAlertDeleteBinding
 import com.example.notesapp.databinding.CustomAlertLogoutBinding
 import com.example.notesapp.databinding.FragmentHomeBinding
