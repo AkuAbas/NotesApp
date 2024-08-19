@@ -2,15 +2,16 @@ package com.example.notesapp.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notesapp.databinding.NoteItemBinding
 import com.example.notesapp.local.Note
 
-class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
+class NoteAdapter : ListAdapter<Note, NoteAdapter.NoteViewHolder>((NoteDiffCallback())) {
 
-    private val noteList = arrayListOf<Note>()
     lateinit var onClick: (Note) -> Unit
-    lateinit var onDelete: (Note)-> Unit
+    lateinit var onDelete: (Note) -> Unit
 
     inner class NoteViewHolder(val noteItemBinding: NoteItemBinding) :
         RecyclerView.ViewHolder(noteItemBinding.root)
@@ -20,12 +21,8 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
         return NoteViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return noteList.size
-    }
-
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        val data = noteList[position]
+        val data = getItem(position)
         holder.noteItemBinding.note = data
         holder.noteItemBinding.noteItem.setOnClickListener {
             onClick(data)
@@ -35,9 +32,14 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
         }
     }
 
-    fun updateList(newList: List<Note>) {
-        noteList.clear()
-        noteList.addAll(newList)
-        notifyDataSetChanged()
+    class NoteDiffCallback : DiffUtil.ItemCallback<Note>() {
+        override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
+            return oldItem == newItem
+        }
+
     }
 }

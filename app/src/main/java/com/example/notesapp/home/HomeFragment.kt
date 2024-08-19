@@ -1,6 +1,7 @@
 package com.example.notesapp.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -49,7 +50,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun observeData() {
         viewModel.noteList.observe(viewLifecycleOwner) {
-            noteAdapter.updateList(it)
+            noteAdapter.submitList(it)
             if (it.isNotEmpty()) binding.textViewHome.gone()
         }
         viewModel.isLogedOut.observe(viewLifecycleOwner) {
